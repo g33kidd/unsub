@@ -1,20 +1,20 @@
 defmodule Unsub.AuthController do
   use Unsub.Web, :controller
 
-  alias Unsub.Twitter
+  alias Unsub.{Twitter, User}
 
   def callback(conn, params) do
-    {:ok, access_token} = get_access_token(params)
-
+    access_token = Twitter.get_access_token(params)
     Twitter.setup(access_token)
-    ExTwitter.verify_credentials()
-    |> IO.inspect
-
-    conn |> redirect(to: "/")
-  end
-
-  def get_access_token(%{"oauth_verifier" => verifier, "oauth_token" => token}) do
-    ExTwitter.access_token(verifier, token)
+    case User.find_or_create(access_token) do
+      {:ok, user} ->
+        conn
+        |> put_session(:current_user, user.id)
+        |> redirect(to: "/")
+      {:error, reason} ->
+        IO.puts reason
+        conn |> redirect(to: "/")
+    end
   end
 
 end

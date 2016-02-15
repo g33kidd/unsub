@@ -25,6 +25,12 @@ defmodule Unsub.Twitter do
     ]
   end
 
+  def get_access_token(%{"oauth_verifier" => verifier, "oauth_token" => token}) do
+    {:ok, access_token} = ExTwitter.access_token(verifier, token)
+    access_token
+  end
+
+  def basic_info(), do: current_account() |> basic_info()
   def basic_info(credentials) do
     %{
       username: credentials.screen_name,
@@ -32,14 +38,12 @@ defmodule Unsub.Twitter do
     }
   end
 
-  def current_account() do
-    ExTwitter.verify_credentials
-  end
+  def current_account(), do: ExTwitter.verify_credentials
 
-  def get_following() do
-  end
-
-  def get_followers() do
-  end
+  # def get_following() do
+  # end
+  #
+  # def get_followers() do
+  # end
 
 end
