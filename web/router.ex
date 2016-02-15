@@ -19,8 +19,14 @@ defmodule Unsub.Router do
     get "/", PageController, :index
   end
 
+  scope "/auth", Unsub do
+    pipe_through :browser
+
+    get "/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
-  # scope "/api", Unsub do
-  #   pipe_through :api
-  # end
+  scope "/api", Unsub do
+    pipe_through :api
+  end
 end
