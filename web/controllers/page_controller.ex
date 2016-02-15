@@ -7,4 +7,5 @@ defmodule Unsub.PageController do
     render conn, "index.html",
       auth_url: authenticate_url
   end
+
 end

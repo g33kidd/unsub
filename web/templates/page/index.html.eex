@@ -1,5 +1,6 @@
 <%= if logged_in?(@conn) do %>
   <h1>LOGGED IN! HEY <%= current_user(@conn).username %></h1>
+  <a href="<%= auth_path(@conn, :delete) %>">Logout</a>
 <%= else %>
   <a href="<%= @auth_url %>">Sign in with twitter</a>
 <%= end %>

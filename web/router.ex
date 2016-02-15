@@ -23,6 +23,7 @@ defmodule Unsub.Router do
     pipe_through :browser
 
     get "/callback", AuthController, :callback
+    get "/logout", AuthController, :delete
   end
 
   # Other scopes may use custom stacks.

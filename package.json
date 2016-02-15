@@ -8,6 +8,7 @@
     "javascript-brunch": ">= 1.0 < 1.8",
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
+    "sass-brunch": "^2.0.0",
     "uglify-js-brunch": ">= 1.0 < 1.8",
     "vue": "^1.0.16",
     "vue-resource": "^0.7.0"

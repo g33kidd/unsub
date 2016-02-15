@@ -10,11 +10,19 @@ defmodule Unsub.AuthController do
       {:ok, user} ->
         conn
         |> put_session(:current_user, user.id)
+        |> put_flash(:info, "You are now signed in!")
         |> redirect(to: "/")
       {:error, reason} ->
         IO.puts reason
         conn |> redirect(to: "/")
     end
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> delete_session(:current_user)
+    |> put_flash(:info, "Logged out!")
+    |> redirect(to: "/")
   end
 
 end
