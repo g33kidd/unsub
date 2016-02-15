@@ -12,6 +12,6 @@
 
 ## TODO
 
-- Implement twitter sign-in.
+- Implement twitter sign-in. +
 - Add some API calls for Vue or reqwest to interact with.
 - Token based authentication for the API.

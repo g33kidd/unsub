@@ -38,7 +38,8 @@ defmodule Unsub.Twitter do
     }
   end
 
-  def current_account(), do: ExTwitter.verify_credentials
+  def current_account(), do: ExTwitter.verify_credentials()
+  # def get_following(), do: ExTwitter.
 
   # def get_following() do
   # end
