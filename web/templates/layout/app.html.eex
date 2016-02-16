@@ -13,6 +13,13 @@
 
   <body>
     <div class="container">
+      <header>
+        <%= if logged_in?(@conn) do %>
+          <p>Hey, <%= current_user(@conn).username %>! <a href="<%= auth_path(@conn, :delete) %>">Logout</a></p>
+        <%= else %>
+          <a href="<%= @auth_url %>">Sign in with twitter</a>
+        <%= end %>
+      </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>

@@ -17,11 +17,12 @@ defmodule Unsub.Twitter do
   Sets the ExTwitter configuration for the current process.
   """
   def setup(access_token) do
+    token = for {key, val} <- access_token, into: %{}, do: {String.to_atom(key), val}
     ExTwitter.Config.set :process, [
       consumer_key: System.get_env("TWITTER_CONSUMER_KEY"),
       consumer_secret: System.get_env("TWITTER_CONSUMER_SECRET"),
-      access_token: access_token.oauth_token,
-      access_token_secret: access_token.oauth_token_secret
+      access_token: token.oauth_token,
+      access_token_secret: token.oauth_token_secret
     ]
   end
 
@@ -39,12 +40,7 @@ defmodule Unsub.Twitter do
   end
 
   def current_account(), do: ExTwitter.verify_credentials()
-  # def get_following(), do: ExTwitter.
-
-  # def get_following() do
-  # end
-  #
-  # def get_followers() do
-  # end
+  def get_following(count), do: ExTwitter.friends count: count
+  def unfollow(userid), do: ExTwitter.unfollow(userid)
 
 end

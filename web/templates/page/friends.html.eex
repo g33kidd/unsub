@@ -1,0 +1,11 @@
+<%= for friend <- @following do %>
+
+  <div class="friend">
+    <hr>
+    <p>Followers: <%= Map.from_struct(friend).followers_count %></p>
+    <p>Following: <%= Map.from_struct(friend).friends_count %></p>
+
+    <%= link("unfollow", to: friends_path(@conn, :delete, friend.screen_name), data: [confirm: "Sure?"], method: "delete") %>
+    <%= friend.screen_name %>
+  </div>
+<% end %>
